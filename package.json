@@ -1,0 +1,23 @@
+{
+  "name": "@ldb/db-common",
+  "version": "0.0.1",
+  "description": "Add missing metadata to tickets",
+  "main": "src/index.js",
+  "scripts": {
+    "repl": "node --experimental-specifier-resolution=node --eval=\"process.chdir('./src');\" --interactive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git3.nexdev.net/l1/database/db-packages/db-common.git"
+  },
+  "author": {
+    "name": "Billy Bùi",
+    "email": "billy.bui@luminet.vn"
+  },
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@ldb/terminal-paint": "^0.0.4",
+    "mongodb": "^4.8.1"
+  }
+}

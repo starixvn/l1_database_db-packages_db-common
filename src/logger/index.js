@@ -7,24 +7,22 @@ import { tabNL, isString } from "../utils/string";
  * @param {string} message 
  * @param {string} label 
  * @param {string} subject 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
-export async function trace (message, label, subject) {
+export async function trace (message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.TRACE < Config.status()) return -1;
 
-    const time = new Date().toISOString();
+    const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
     const level = 'T';
-    let title = label ? `[${label}]` : '';
-    title += subject ? (label ? ' - ' : '') + subject : '';
+    const title = label ? `[${label}]` : '';
+    const msg = message ? Paint.faint(message) : '';
+    const content = [[title, subject].filter(Boolean).join(' - '), msg].filter(Boolean).join('\n');
 
-    const msg = tabNL(title ? `\
-${title}
-${Paint.faint(message)}` : Paint.faint(message));
-
-    console.log(Paint.fgBlue(`${time} ${level}  ${msg}`));
+    console.log(Paint.fgBlue(`${ltime} ${level}  ${tabNL(content)}`));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -35,24 +33,22 @@ ${Paint.faint(message)}` : Paint.faint(message));
  * @param {string} message 
  * @param {string} label 
  * @param {string} subject 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function debug (message, label, subject) {
+ export async function debug (message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.DEBUG < Config.status()) return -1;
 
-    const time = new Date().toISOString();
+    const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
     const level = 'D';
-    let title = label ? `[${label}]` : '';
-    title += subject ? (label ? ' - ' : '') + subject : '';
+    const title = label ? `[${label}]` : '';
+    const msg = message ? Paint.faint(message) : '';
+    const content = [[title, subject].filter(Boolean).join(' - '), msg].filter(Boolean).join('\n');
 
-    const msg = tabNL(title ? `\
-${title}
-${Paint.faint(message)}` : Paint.faint(message));
-
-    console.log(Paint.fgGreen(`${time} ${level}  ${msg}`));
+    console.log(Paint.fgGreen(`${ltime} ${level}  ${tabNL(content)}`));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -63,24 +59,21 @@ ${Paint.faint(message)}` : Paint.faint(message));
  * @param {string} message 
  * @param {string} label 
  * @param {string} subject 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function info (message, label, subject) {
+ export async function info (message, label, subject, time) {
   try {
-    if (VERBOSE_LEVEL.INFO < Config.status()) return;
+    if (VERBOSE_LEVEL.INFO < Config.status()) return -1;
 
-    const time = new Date().toISOString();
+    const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
     const level = 'I';
-    let title = label ? `[${label}]` : '';
-    title += subject ? (label ? ' - ' : '') + subject : '';
+    const title = label ? `[${label}]` : '';
+    const content = [[title, subject].filter(Boolean).join(' - '), message].filter(Boolean).join('\n');
 
-    const msg = tabNL(title ? `\
-${title}
-${message}` : message);
-
-    console.log(Paint.fgWhite(`${time} ${level}  ${msg}`));
+    console.log(Paint.fgWhite(`${ltime} ${level}  ${tabNL(content)}`));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -91,24 +84,21 @@ ${message}` : message);
  * @param {string} message 
  * @param {string} label 
  * @param {string} subject 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function warn (message, label, subject) {
+ export async function warn (message, label, subject, time) {
   try {
-    if (VERBOSE_LEVEL.WARN < Config.status()) return;
+    if (VERBOSE_LEVEL.WARN < Config.status()) return -1;
 
-    const time = new Date().toISOString();
+    const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
     const level = Paint.bold('W');
-    let title = label ? `[${label}]` : '';
-    title += subject ? (label ? ' - ' : '') + subject : '';
+    const title = label ? Paint.bold(`[${label}]`) : '';
+    const content = [[title, subject].filter(Boolean).join(' - '), message].filter(Boolean).join('\n');
 
-    const msg = tabNL(title ? `\
-${Paint.bold(title)}
-${message}` : message);
-
-    console.log(Paint.fgYellow(`${time} ${level}  ${msg}`));
+    console.log(Paint.fgYellow(`${ltime} ${level}  ${tabNL(content)}`));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -119,24 +109,21 @@ ${message}` : message);
  * @param {string} message 
  * @param {string} label 
  * @param {string} subject 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function err (message, label, subject) {
+ export async function err (message, label, subject, time) {
   try {
-    if (VERBOSE_LEVEL.ERROR < Config.status()) return;
+    if (VERBOSE_LEVEL.ERROR < Config.status()) return -1;
 
-    const time = new Date().toISOString();
-    const level = Paint.bold('E');
-    let title = label ? `[${label}]` : '';
-    title += subject ? (label ? ' - ' : '') + subject : '';
+    const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
+    const level = 'E';
+    const title = label ? `[${label}]` : '';
+    const content = [[title, subject].filter(Boolean).join(' - '), message].filter(Boolean).join('\n');
 
-    const msg = tabNL(title ? `\
-${title}
-${message}` : message);
-
-    console.log(Paint.bold(Paint.fgRed(`${time} ${level}  ${msg}`)));
+    console.log(Paint.bold(Paint.fgRed(`${ltime} ${level}  ${tabNL(content)}`)));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -147,24 +134,21 @@ ${message}` : message);
  * @param {string} message 
  * @param {string} label 
  * @param {string} subject 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function fatal (message, label, subject) {
+ export async function fatal (message, label, subject, time) {
   try {
-    if (VERBOSE_LEVEL.FATAL < Config.status()) return;
+    if (VERBOSE_LEVEL.FATAL < Config.status()) return -1;
 
-    const time = new Date().toISOString();
+    const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
     const level = 'F';
-    let title = label ? `[${label}]` : '';
-    title += subject ? (label ? ' - ' : '') + subject : '';
+    const title = label ? Paint.underline(`[${label}]`) : '';
+    const content = [[title, subject].filter(Boolean).join(' - '), message].filter(Boolean).join('\n');
 
-    const msg = tabNL(title ? `\
-${Paint.underline(title)}
-${message}` : message);
-
-    console.log(Paint.bold(Paint.fgMagenta(`${Paint.underline(time)} ${Paint.underline(level)}  ${msg}`)));
+    console.log(Paint.bold(Paint.fgMagenta(`${Paint.underline(ltime)} ${Paint.underline(level)}  ${tabNL(content)}`)));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -173,44 +157,44 @@ ${message}` : message);
 
 /**
  * 
- * @param {Error} error 
+ * @param {Error}  error 
  * @param {string} label 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  */
-export async function catchWarning (error, label) {
-  if (isString(error)) return warn(error, label);
+export async function catchWarning (error, label, time) {
+  if (isString(error)) return warn(error, label, undefined, time);
 
-  let msg = error.message ? error.message + '\n' : '';
-  msg += error.stack ? `Stack: ${error.stack}\n` : '';
-  return warn(msg, label, error.name);
+  const msg = [error.message, error.stack ? `Stack: ${error.stack}` : ''].filter(Boolean).join('\n');
+  return warn(msg, label, error.name, time);
 };
 
 /**
  * 
- * @param {Error} error 
+ * @param {Error}  error 
  * @param {string} label 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  */
-export async function catchError (error, label) {
-  if (isString(error)) return err(error, label);
+export async function catchError (error, label, time) {
+  if (isString(error)) return err(error, label, undefined, time);
 
-  let msg = error.message ? error.message + '\n' : '';
-  msg += error.stack ? `Stack: ${error.stack}\n` : '';
-  return err(msg, label, error.name);
+  const msg = [error.message, error.stack ? `Stack: ${error.stack}` : ''].filter(Boolean).join('\n');
+  return err(msg, label, error.name, time);
 };
 
 /**
  * 
- * @param {Error} error 
+ * @param {Error}  error 
  * @param {string} label 
+ * @param {Date}   time 
  * @returns {Promise<number>}
  */
-export async function catchFatal (error, label) {
-  if (isString(error)) return fatal(error, label);
+export async function catchFatal (error, label, time) {
+  if (isString(error)) return fatal(error, label, undefined, time);
 
-  let msg = error.message ? error.message + '\n' : '';
-  msg += error.stack ? `Stack: ${error.stack}\n` : '';
-  return fatal(msg, label, error.name);
+  const msg = [error.message, error.stack ? `Stack: ${error.stack}` : ''].filter(Boolean).join('\n');
+  return fatal(msg, label, error.name, time);
 };
 
 const Logger = Object.freeze({

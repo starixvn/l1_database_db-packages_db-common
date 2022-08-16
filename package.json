@@ -1,10 +1,11 @@
 {
   "name": "@ldb/db-common",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Add missing metadata to tickets",
   "main": "src/index.js",
   "scripts": {
-    "repl": "node --experimental-specifier-resolution=node --eval=\"process.chdir('./src');\" --interactive"
+    "repl": "node --experimental-specifier-resolution=node --eval=\"process.chdir('./src');\" --interactive",
+    "publish": "npm install && npm publish --verbose"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+import DBHelper from "./db-helper";
 import Logger from "./logger";
 
-export { Logger };
+export { DBHelper, Logger };

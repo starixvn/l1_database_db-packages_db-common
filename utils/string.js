@@ -18,3 +18,6 @@ export function isString (text) {
   if (typeof text === "string" || text instanceof String) return true;
   return false;
 };
+
+const StringUtils = Object.freeze({ tabNL, isString });
+export default StringUtils;

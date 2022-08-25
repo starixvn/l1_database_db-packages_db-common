@@ -1,10 +1,10 @@
-import Schedule from "./schedule";
+import ScheduleUtils from "./schedule";
 import StringUtils from "./string";
 
-export { Schedule, StringUtils };
+export { ScheduleUtils, StringUtils };
 
 const Utils = Object.freeze({
-  Schedule: Schedule,
+  Schedule: ScheduleUtils,
   String: StringUtils,
 });
 export default Utils;

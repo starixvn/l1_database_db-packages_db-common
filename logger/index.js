@@ -1,18 +1,20 @@
+/* eslint no-console: "off" */
+
 import { Paint } from "@ldb/terminal-paint";
+import Config from "./config";
 import { VERBOSE_LEVEL } from "./const";
-import { Config } from "./config";
 import { tabNL, isString } from "../utils/string";
 
 /**
- * @param {string} message 
- * @param {string} label 
- * @param {string} subject 
- * @param {Date}   time 
+ * @param {string} message
+ * @param {string} label
+ * @param {string} subject
+ * @param {Date}   time
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
-export async function trace (message, label, subject, time) {
+export async function trace(message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.TRACE < Config.status()) return -1;
 
@@ -30,15 +32,15 @@ export async function trace (message, label, subject, time) {
 };
 
 /**
- * @param {string} message 
- * @param {string} label 
- * @param {string} subject 
- * @param {Date}   time 
+ * @param {string} message
+ * @param {string} label
+ * @param {string} subject
+ * @param {Date}   time
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function debug (message, label, subject, time) {
+export async function debug(message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.DEBUG < Config.status()) return -1;
 
@@ -56,15 +58,15 @@ export async function trace (message, label, subject, time) {
 };
 
 /**
- * @param {string} message 
- * @param {string} label 
- * @param {string} subject 
- * @param {Date}   time 
+ * @param {string} message
+ * @param {string} label
+ * @param {string} subject
+ * @param {Date}   time
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function info (message, label, subject, time) {
+export async function info(message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.INFO < Config.status()) return -1;
 
@@ -81,15 +83,15 @@ export async function trace (message, label, subject, time) {
 };
 
 /**
- * @param {string} message 
- * @param {string} label 
- * @param {string} subject 
- * @param {Date}   time 
+ * @param {string} message
+ * @param {string} label
+ * @param {string} subject
+ * @param {Date}   time
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function warn (message, label, subject, time) {
+export async function warn(message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.WARN < Config.status()) return -1;
 
@@ -106,15 +108,15 @@ export async function trace (message, label, subject, time) {
 };
 
 /**
- * @param {string} message 
- * @param {string} label 
- * @param {string} subject 
- * @param {Date}   time 
+ * @param {string} message
+ * @param {string} label
+ * @param {string} subject
+ * @param {Date}   time
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function err (message, label, subject, time) {
+export async function err(message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.ERROR < Config.status()) return -1;
 
@@ -131,15 +133,15 @@ export async function trace (message, label, subject, time) {
 };
 
 /**
- * @param {string} message 
- * @param {string} label 
- * @param {string} subject 
- * @param {Date}   time 
+ * @param {string} message
+ * @param {string} label
+ * @param {string} subject
+ * @param {Date}   time
  * @returns {Promise<number>}
  *   - `0` Success
  *   - non-zero Failure
  */
- export async function fatal (message, label, subject, time) {
+export async function fatal(message, label, subject, time) {
   try {
     if (VERBOSE_LEVEL.FATAL < Config.status()) return -1;
 
@@ -156,13 +158,12 @@ export async function trace (message, label, subject, time) {
 };
 
 /**
- * 
- * @param {Error}  error 
- * @param {string} label 
- * @param {Date}   time 
+ * @param {Error}  error
+ * @param {string} label
+ * @param {Date}   time
  * @returns {Promise<number>}
  */
-export async function catchWarning (error, label, time) {
+export async function catchWarning(error, label, time) {
   if (isString(error)) return warn(error, label, undefined, time);
 
   const msg = [error.message, error.stack ? `Stack: ${error.stack}` : ''].filter(Boolean).join('\n');
@@ -170,13 +171,12 @@ export async function catchWarning (error, label, time) {
 };
 
 /**
- * 
- * @param {Error}  error 
- * @param {string} label 
- * @param {Date}   time 
+ * @param {Error}  error
+ * @param {string} label
+ * @param {Date}   time
  * @returns {Promise<number>}
  */
-export async function catchError (error, label, time) {
+export async function catchError(error, label, time) {
   if (isString(error)) return err(error, label, undefined, time);
 
   const msg = [error.message, error.stack ? `Stack: ${error.stack}` : ''].filter(Boolean).join('\n');
@@ -184,13 +184,12 @@ export async function catchError (error, label, time) {
 };
 
 /**
- * 
- * @param {Error}  error 
- * @param {string} label 
- * @param {Date}   time 
+ * @param {Error}  error
+ * @param {string} label
+ * @param {Date}   time
  * @returns {Promise<number>}
  */
-export async function catchFatal (error, label, time) {
+export async function catchFatal(error, label, time) {
   if (isString(error)) return fatal(error, label, undefined, time);
 
   const msg = [error.message, error.stack ? `Stack: ${error.stack}` : ''].filter(Boolean).join('\n');

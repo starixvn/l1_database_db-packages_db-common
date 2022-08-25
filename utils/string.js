@@ -1,20 +1,17 @@
-
 /**
- * 
- * @param {string} text 
- * @param {number} [tab=28] 
+ * @param {string} text
+ * @param {number} [tab=28]
  * @returns {string}
  */
-export function tabNL (text, tab = 28) {
+export function tabNL(text, tab = 28) {
   return text.replace(/\n/g, `\n${' '.repeat(tab)}`);
 };
 
 /**
- * 
- * @param {*} text 
+ * @param {*} text
  * @returns {boolean}
  */
-export function isString (text) {
+export function isString(text) {
   if (typeof text === "string" || text instanceof String) return true;
   return false;
 };

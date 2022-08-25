@@ -1,6 +1,6 @@
 {
   "name": "@ldb/db-common",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Add missing metadata to tickets",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,33 @@
   "dependencies": {
     "@ldb/terminal-paint": "^0.1.0",
     "mongodb": "^4.8.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": "airbnb-base",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "rules": {
+      "comma-spacing": "off",
+      "import/no-named-as-default": "off",
+      "import/no-named-as-default-member": "off",
+      "key-spacing": "off",
+      "max-len": "off",
+      "no-extra-semi": "off",
+      "no-multi-spaces": "off",
+      "quotes": "off",
+      "object-curly-newline": "off",
+      "object-property-newline": "off"
+    }
   }
 }

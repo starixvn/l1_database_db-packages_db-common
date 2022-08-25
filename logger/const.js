@@ -8,4 +8,6 @@ export const VERBOSE_LEVEL = Object.freeze({
   ERROR : 5,
   FATAL : 6,
 });
-export default VERBOSE_LEVEL;
+
+const CONST = Object.freeze({ VERBOSE_LEVEL });
+export default CONST;

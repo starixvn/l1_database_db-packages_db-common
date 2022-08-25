@@ -4,48 +4,48 @@ import { VERBOSE_LEVEL } from "./const";
 let currentLevel = VERBOSE_LEVEL.INFO;
 
 /** Turn off all log messages */
-function setOff () {
+export function setOff() {
   currentLevel = VERBOSE_LEVEL.OFF;
 };
 
-function setAll () {
+export function setAll() {
   currentLevel = VERBOSE_LEVEL.ALL;
 }
 
 /** Log all messages with verbose level that equal or larger than TRACE */
-function setTrace () {
+export function setTrace() {
   currentLevel = VERBOSE_LEVEL.TRACE;
 };
 
 /** Log all messages with verbose level that equal or larger than DEBUG */
-function setDebug () {
+export function setDebug() {
   currentLevel = VERBOSE_LEVEL.DEBUG;
 };
 
 /** Log all messages with verbose level that equal or larger than INFO */
-function setInfo () {
+export function setInfo() {
   currentLevel = VERBOSE_LEVEL.INFO;
 };
 
 /** Log all messages with verbose level that equal or larger than WARN */
-function setWarn () {
+export function setWarn() {
   currentLevel = VERBOSE_LEVEL.WARN;
 };
 
 /** Log all messages with verbose level that equal or larger than ERROR */
-function setError () {
+export function setError() {
   currentLevel = VERBOSE_LEVEL.ERROR;
 };
 
 /** Log all messages with verbose level that equal or larger than FATAL */
-function setFatal () {
+export function setFatal() {
   currentLevel = VERBOSE_LEVEL.FATAL;
 };
 
 /** Get current verbose level */
-function status () {
+export function status() {
   return currentLevel;
 };
 
-export const Config = Object.freeze({ setOff, setAll, setTrace, setDebug, setInfo, setWarn, setError, setFatal, status });
+const Config = Object.freeze({ setOff, setAll, setTrace, setDebug, setInfo, setWarn, setError, setFatal, status });
 export default Config;

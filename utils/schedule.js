@@ -1,3 +1,4 @@
+
 /**
  * 
  * @param {number} period 
@@ -16,8 +17,5 @@ export function getNextTimeout (period) {
   return getNextEpoch(period) - Date.now();
 }
 
-const Schedule = Object.freeze({
-  getNextEpoch,
-  getNextTimeout,
-});
+const Schedule = Object.freeze({ getNextEpoch, getNextTimeout });
 export default Schedule;

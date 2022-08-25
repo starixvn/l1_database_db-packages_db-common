@@ -1,6 +1,6 @@
 {
   "name": "@ldb/db-common",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Add missing metadata to tickets",
   "main": "index.js",
   "scripts": {

@@ -1,7 +1,7 @@
 {
   "name": "@ldb/db-common",
-  "version": "0.0.9",
-  "description": "Add missing metadata to tickets",
+  "version": "0.0.10",
+  "description": "Database common modules",
   "main": "index.js",
   "scripts": {
     "repl": "node --experimental-specifier-resolution=node --interactive"

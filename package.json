@@ -1,6 +1,6 @@
 {
   "name": "@ldb/db-common",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Database common modules",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
   "type": "module",
   "dependencies": {
     "@ldb/terminal-paint": "0.1.1",
-    "mongodb": "4.9.0"
+    "mongodb": "4.9.0",
+    "mongodb-connection-string-url": "2.5.3"
   },
   "devDependencies": {
     "eslint": "^8.22.0",

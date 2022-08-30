@@ -1,4 +1,5 @@
 import { MongoClient, Db, Collection } from "mongodb";
+import ConnectionString from "mongodb-connection-string-url";
 import { isString } from "../utils/string";
 import buildURI from "./uri";
 import subscribeDBEvents from "./db-event-monitoring";
@@ -16,12 +17,15 @@ export function createMongoConnection(url) {
 };
 
 /**
- * @param {string|MongoClient|Db|Collection} reference
+ * @param {string|ConnectionString|MongoClient|Db|Collection} reference
  * @returns {MongoClient} The MongoClient object that associated with $reference
  */
 export function getMongoClient(reference) {
   /** MongoClient can be created from connection string */
   if (isString(reference)) return createMongoConnection(reference);
+
+  /** MongoClient also can be created from ConnectionString object */
+  if (reference instanceof ConnectionString) return createMongoConnection(reference.href);
 
   /** Return itself if $reference is already a MongoClient instance */
   if (reference instanceof MongoClient) return reference;

@@ -31,7 +31,7 @@ export function buildURI({ SRV_PROTOCOL, SRV_USERNAME, SRV_PASSWORD, SRV_HOSTS, 
 
   /** Using config as default */
   if (params) {
-    Array.from(params.OPTIONS.entries()).forEach((option) => {
+    Array.from(params.entries()).forEach((option) => {
       uri.searchParams.set(...option);
     });
   }

@@ -100,7 +100,7 @@ export async function warn(message, label, subject, time) {
     const title = label ? Paint.bold(`[${label}]`) : '';
     const content = [[title, subject].filter(Boolean).join(' - '), message].filter(Boolean).join('\n');
 
-    console.log(Paint.fgYellow(`${ltime} ${level}  ${tabNL(content)}`));
+    console.log(Paint.fgYellow(`${Paint.bold([ltime, level].join(' '))}  ${tabNL(content)}`));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -123,9 +123,9 @@ export async function err(message, label, subject, time) {
     const ltime = time instanceof Date ? time.toISOString() : new Date().toISOString();
     const level = 'E';
     const title = label ? `[${label}]` : '';
-    const content = [[title, subject].filter(Boolean).join(' - '), message].filter(Boolean).join('\n');
+    const content = [Paint.bold([title, subject].filter(Boolean).join(' - ')), message].filter(Boolean).join('\n');
 
-    console.log(Paint.bold(Paint.fgRed(`${ltime} ${level}  ${tabNL(content)}`)));
+    console.log(Paint.fgRed(`${Paint.bold([ltime, level].join(' '))}  ${tabNL(content)}`));
   } catch (e) {
     return e.code ?? 1;
   }
@@ -197,7 +197,8 @@ export async function catchFatal(error, label, time) {
 };
 
 const Logger = Object.freeze({
-  Config, VERBOSE_LEVEL,
+  VERBOSE_LEVEL,
+  Config,
   trace, debug, info, warn, err, fatal,
   catchWarning, catchError, catchFatal,
 });

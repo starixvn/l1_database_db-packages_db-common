@@ -1,12 +1,14 @@
-import DateUtils from "./date";
+import DateUtils     from "./date";
+import NumberUtils   from "./number";
 import ScheduleUtils from "./schedule";
-import StringUtils from "./string";
+import StringUtils   from "./string";
 
-export { DateUtils, ScheduleUtils, StringUtils };
+export { DateUtils, NumberUtils, ScheduleUtils, StringUtils };
 
 const Utils = Object.freeze({
-  Date: DateUtils,
+  Date    : DateUtils,
+  Number  : NumberUtils,
   Schedule: ScheduleUtils,
-  String: StringUtils,
+  String  : StringUtils,
 });
 export default Utils;

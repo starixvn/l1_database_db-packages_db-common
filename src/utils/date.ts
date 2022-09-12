@@ -1,32 +1,34 @@
-import { isString } from "./string";
+export enum PERIOD {
+  DAY     = 'DAY',
+  HOUR    = 'HOUR',
+  MINUTE  = 'MINUTE',
+  DEFAULT = 'DEFAULT',
+}
 
 export const DURATION = Object.freeze({
-  DEFAULT : 1000,
-  MINUTE  : 1000 * 60,
-  HOUR    : 1000 * 60 * 60,
-  DAY     : 1000 * 60 * 60 * 24,
+  [PERIOD.DAY]      : 1000 * 60 * 60 * 24,
+  [PERIOD.HOUR]     : 1000 * 60 * 60,
+  [PERIOD.MINUTE]   : 1000 * 60,
+  [PERIOD.DEFAULT]  : 1000,
 });
 
 /**
  * @param {Date} time
- * @param {string} period
+ * @param {PERIOD} period
  * @returns {string} The formatted string of $time floored to $period
  */
-export function format(time, period) {
-  if (!(time instanceof Date)) throw TypeError(`$time must be a Date`);
-  if (!isString(period)) throw TypeError(`$period must be a string`);
-
+export function format(time: Date, period: string): string {
   const timeStr = time.toISOString();
-  const periodStr = period.toUpperCase();
+  const periodStr = period.toUpperCase() as PERIOD;
 
   switch (periodStr) {
-    case 'DAY':
+    case PERIOD.DAY:
       return timeStr.replace(/T.*/, '');
-    case 'HOUR':
+    case PERIOD.HOUR:
       return timeStr.replace(/T([0-9]{2}).*/, ' $1:00:00');
-    case 'MINUTE':
+    case PERIOD.MINUTE:
       return timeStr.replace(/T([0-9]{2}:[0-9]{2}).*/, ' $1:00');
-    case 'DEFAULT':
+    case PERIOD.DEFAULT:
       return timeStr.replace(/T([0-9]{2}:[0-9]{2}:[0-9]{2}).*/, ' $1');
     default:
       return timeStr;
@@ -37,36 +39,34 @@ export function format(time, period) {
  * @param {string} period
  * @returns {number} The number of milliseconds the $period contains
  */
-export function getPeriod(period) {
-  if (!isString(period)) throw TypeError(`$period must be a string`);
-
-  const periodStr = period.toUpperCase();
+export function getPeriod(period?: string): number {
+  const periodStr = period?.toUpperCase() as PERIOD;
 
   /** Return default period if got invalid value */
-  return DURATION[periodStr] ?? DURATION.DEFAULT;
+  return period ? DURATION[periodStr] : DURATION.DEFAULT;
 };
 
 /**
- * @param {*} input
+ * @param {number | string | Date} input
  * @returns {number} The epoch value of $input
  */
-export function parseEpoch(input) {
+export function parseEpoch(input: number | string | Date): number {
   /** Epoch is the value of Date object */
   if (input instanceof Date) return input.valueOf();
 
   /** Treat all numbers as epoch value */
-  if (typeof input === "number") return input;
+  if (typeof input === 'number') return input;
 
   /** Using Date.parse for the rest */
   return Date.parse(input);
 };
 
 /**
- * @param {*} time
+ * @param {number | string | Date} time
  * @param {string} period
  * @returns {Date} The lower bound Date of the $period that contains the input $time
  */
-export function round(time, period) {
+export function round(time: number | string | Date, period: string): Date {
   const timeEpoch = parseEpoch(time);
   const periodVal = getPeriod(period);
 

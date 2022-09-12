@@ -1,1 +1,1 @@
-# db-common
+# @ldb/db-common

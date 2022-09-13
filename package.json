@@ -1,10 +1,13 @@
 {
   "name": "@ldb/db-common",
-  "version": "0.0.1",
-  "description": "Add missing metadata to tickets",
-  "main": "src/index.js",
+  "version": "1.0.2",
+  "description": "Database common modules",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "repl": "node --experimental-specifier-resolution=node --eval=\"process.chdir('./src');\" --interactive"
+    "repl": "node --experimental-specifier-resolution=node --interactive",
+    "build": "rm -rf lib && tsc -p src",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,9 +18,17 @@
     "email": "billy.bui@luminet.vn"
   },
   "license": "ISC",
-  "type": "module",
   "dependencies": {
-    "@ldb/terminal-paint": "^0.0.4",
-    "mongodb": "^4.8.1"
+    "@ldb/logger": "1.0.0",
+    "@ldb/terminal-paint": "1.0.0",
+    "mongodb": "4.9.1",
+    "mongodb-connection-string-url": "2.5.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "typescript": "^4.8.3"
   }
 }

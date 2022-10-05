@@ -1,7 +1,7 @@
 import { Collection, Db, MongoClient } from 'mongodb';
+import ConnectionString  from 'mongodb-connection-string-url';
+import { buildURI, URIEnvInput }                               from './build-uri';
 import { CollectionInternal, DbInternal, MongoClientInternal } from '../interfaces/mongo';
-import ConnectionString from 'mongodb-connection-string-url';
-import buildURI          from './build-uri';
 import subscribeDBEvents from './db-event-monitoring';
 
 /**
@@ -52,5 +52,8 @@ export function redactMongoConnectionString(connStr: string | ConnectionString |
   return connStr.replace(/^mongodb:\/\/(.*):(.*)@/g, 'mongodb://$1:<REDACTED>@');
 };
 
-const DBHelper = Object.freeze({ buildURI, createMongoConnection, getMongoClient, redactMongoConnectionString });
+export { URIEnvInput };
+export { buildURI };
+
+const DBHelper = { buildURI, createMongoConnection, getMongoClient, redactMongoConnectionString };
 export default DBHelper;

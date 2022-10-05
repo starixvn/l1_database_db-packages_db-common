@@ -1,6 +1,6 @@
 {
   "name": "@ldb/db-common",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Database common modules",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,7 +21,7 @@
   "dependencies": {
     "@ldb/logger": "1.0.0",
     "@ldb/terminal-paint": "1.0.0",
-    "mongodb": "4.9.1",
+    "mongodb": "4.10.0",
     "mongodb-connection-string-url": "2.5.3"
   },
   "devDependencies": {

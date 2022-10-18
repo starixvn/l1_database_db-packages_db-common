@@ -11,13 +11,14 @@ export interface URIEnvInput extends NodeJS.ProcessEnv {
 };
 
 /**
- * @param {URIEnvInput}     env
- * @param {URLSearchParams} [params]
+ * @param {URIEnvInput}       env
+ * @param {URLSearchParams}   [params]
+ * @param {ConnectionString}  [fromURI]
  * @returns {ConnectionString}
  */
-export function buildURI({ SRV_PROTOCOL, SRV_USERNAME, SRV_PASSWORD, SRV_HOSTS, SRV_DB, SRV_REPLSET, SRV_AUTHDB }: URIEnvInput, params?: URLSearchParams): ConnectionString {
+export function buildURI({ SRV_PROTOCOL, SRV_USERNAME, SRV_PASSWORD, SRV_HOSTS, SRV_DB, SRV_REPLSET, SRV_AUTHDB }: URIEnvInput, params?: URLSearchParams, fromURI?: ConnectionString): ConnectionString {
   /** Build using default uri */
-  const uri = new ConnectionString('mongodb://localhost', { looseValidation: false });
+  const uri = new ConnectionString(fromURI?.href ?? 'mongodb://localhost', { looseValidation: false });
 
   /** Using config as default */
   if (params) {

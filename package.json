@@ -1,11 +1,13 @@
 {
   "name": "@ldb/db-common",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Database common modules",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "repl": "node --experimental-specifier-resolution=node --interactive",
+    "repl": "env $(grep -v '^#' .env | xargs -d '\n') ts-node --transpileOnly --experimentalSpecifierResolution=node --interactive",
+    "clean:rm": "rm -rf node_modules && rm package-lock.json || true",
+    "clean": "npm run clean:rm && npm install",
     "build": "rm -rf lib && tsc -p src",
     "prepare": "npm run build"
   },

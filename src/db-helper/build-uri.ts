@@ -2,12 +2,13 @@ import ConnectionString from 'mongodb-connection-string-url';
 
 export interface URIEnvInput extends NodeJS.ProcessEnv {
   SRV_PROTOCOL ?: string;
-  SRV_USERNAME  : string;
-  SRV_PASSWORD  : string;
-  SRV_HOSTS     : string;
-  SRV_DB        : string;
-  SRV_REPLSET   : string;
-  SRV_AUTHDB    : string;
+  SRV_USERNAME ?: string;
+  SRV_PASSWORD ?: string;
+  SRV_HOSTS    ?: string;
+  SRV_DB       ?: string;
+  SRV_REPLSET  ?: string;
+  SRV_AUTHDB   ?: string;
+  APP_NAME     ?: string;
 };
 
 /**
@@ -16,7 +17,7 @@ export interface URIEnvInput extends NodeJS.ProcessEnv {
  * @param {ConnectionString}  [fromURI]
  * @returns {ConnectionString}
  */
-export function buildURI({ SRV_PROTOCOL, SRV_USERNAME, SRV_PASSWORD, SRV_HOSTS, SRV_DB, SRV_REPLSET, SRV_AUTHDB }: URIEnvInput, params?: URLSearchParams, fromURI?: ConnectionString): ConnectionString {
+export function buildURI({ SRV_PROTOCOL, SRV_USERNAME, SRV_PASSWORD, SRV_HOSTS, SRV_DB, SRV_REPLSET, SRV_AUTHDB, APP_NAME }: URIEnvInput, params?: URLSearchParams, fromURI?: ConnectionString): ConnectionString {
   /** Build using default uri */
   const uri = new ConnectionString(fromURI?.href ?? 'mongodb://localhost', { looseValidation: false });
 
@@ -51,6 +52,9 @@ export function buildURI({ SRV_PROTOCOL, SRV_USERNAME, SRV_PASSWORD, SRV_HOSTS, 
 
   /** Set authenticate database option */
   if (SRV_AUTHDB) uri.searchParams.set('authSource', SRV_AUTHDB);
+
+  /** Set custom application name */
+  if (APP_NAME) uri.searchParams.set('appName', APP_NAME);
 
   return new ConnectionString(uri.href);
 };

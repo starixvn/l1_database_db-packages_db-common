@@ -1,8 +1,11 @@
 import { Collection, Db, MongoClient, MongoDBNamespace } from 'mongodb';
 import ConnectionString from 'mongodb-connection-string-url';
+import { ConnectionStringRef, MongoClientRef }                 from './db-helper/types';
 import { CollectionInternal, DbInternal, MongoClientInternal } from './interfaces/mongo';
-import DBHelper, { URIEnvInput } from './db-helper';
-import Utils, { DateUtils, ScheduleUtils } from './utils';
+import { URIEnvInput }                                         from './interfaces/uri-env-input';
+import DBHelper      from './db-helper/db-helper';
+import DateUtils     from './utils/date';
+import ScheduleUtils from './utils/schedule';
 
 /** Re-export mongodb classes */
 export { ConnectionString, MongoDBNamespace, MongoClient, Db, Collection };
@@ -10,14 +13,17 @@ export { ConnectionString, MongoDBNamespace, MongoClient, Db, Collection };
 /** Export internal interfaces */
 export { MongoClientInternal, DbInternal, CollectionInternal, URIEnvInput };
 
+/** Export types */
+export { ConnectionStringRef, MongoClientRef };
+
 /** Export utils */
 export { DateUtils, ScheduleUtils };
 
 /** Export helpers */
-export { DBHelper, Utils };
+export { DBHelper };
 
 const DBCommon = {
-  MongoDBNamespace, MongoClient, Db, Collection,
-  DBHelper, Utils,
+  ConnectionString, MongoDBNamespace, MongoClient, Db, Collection,
+  DBHelper, DateUtils, ScheduleUtils,
 };
 export default DBCommon;

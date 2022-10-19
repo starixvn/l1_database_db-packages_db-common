@@ -6,7 +6,7 @@ import { CommandFailedEvent, ConnectionCheckOutFailedEvent, ConnectionClosedEven
  * ConnectionPoolClosedEvent  is emitted when a connection pool is closed, prior to server instance destruction
  * ConnectionPoolClearedEvent is emitted when the connection pool’s generation count is increased
  * Verbosity: INFO
- * @param {ConnectionPoolCreatedEvent|ConnectionPoolClosedEvent|ConnectionPoolClearedEvent} event
+ * @param event
  */
 export function whenConnectionPoolEvents(event: ConnectionPoolCreatedEvent | ConnectionPoolClosedEvent | ConnectionPoolClearedEvent) {
   const { time } = event;
@@ -19,7 +19,7 @@ export function whenConnectionPoolEvents(event: ConnectionPoolCreatedEvent | Con
 /**
  * ConnectionClosedEvent is emitted when a connection is closed
  * Verbosity: WARN
- * @param {ConnectionClosedEvent} event
+ * @param event
  */
 export function whenConnectionClosed(event: ConnectionClosedEvent) {
   const { time } = event;
@@ -33,7 +33,7 @@ export function whenConnectionClosed(event: ConnectionClosedEvent) {
 /**
  * ConnectionCheckOutFailedEvent is emitted when an operation fails to acquire a connection for execution
  * Verbosity: ERROR
- * @param {ConnectionCheckOutFailedEvent} event
+ * @param event
  */
 export function whenConnectionCheckOutFailed(event: ConnectionCheckOutFailedEvent) {
   const { time } = event;
@@ -47,7 +47,7 @@ export function whenConnectionCheckOutFailed(event: ConnectionCheckOutFailedEven
 /**
  * CommandFailedEvent is emitted when a command failed
  * Verbosity: ERROR
- * @param {CommandFailedEvent} event
+ * @param event
  */
 export function whenCommandFailed(event: CommandFailedEvent) {
   const label = event.constructor.name;
@@ -68,9 +68,10 @@ export function whenError(event: Error) {
 };
 
 /**
- * @param {MongoClient} client
+ * @param client
+ * @returns The same client
  */
-export function subscribeDBEvents(client: MongoClient) {
+export function subscribeDBEvents(client: MongoClient): MongoClient {
   client.on('connectionPoolCreated', whenConnectionPoolEvents);
   client.on('connectionPoolClosed', whenConnectionPoolEvents);
   client.on('connectionPoolCleared', whenConnectionPoolEvents);
@@ -78,5 +79,7 @@ export function subscribeDBEvents(client: MongoClient) {
   client.on('connectionCheckOutFailed', whenConnectionCheckOutFailed);
   client.on('commandFailed', whenCommandFailed);
   client.on('error', whenError);
+
+  return client;
 };
 export default subscribeDBEvents;

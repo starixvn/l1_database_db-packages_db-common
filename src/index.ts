@@ -1,4 +1,4 @@
-import * as MongoDB     from 'mongodb';
+import { Collection, Db, MongoClient, MongoDBNamespace, Document } from 'mongodb';
 import ConnectionString from 'mongodb-connection-string-url';
 import * as BSON        from 'bson';
 import Logger           from '@ldb/logger';
@@ -9,8 +9,8 @@ import DBHelper      from './db-helper/db-helper';
 import DateUtils     from './utils/date';
 import ScheduleUtils from './utils/schedule';
 
-/** Re-export mongodb classes */
-export { BSON, ConnectionString, MongoDB };
+/** Re-export mongodb */
+export { BSON, ConnectionString, MongoDBNamespace, MongoClient, Db, Collection, Document };
 
 /** Re-export logger */
 export { Logger };
@@ -28,7 +28,7 @@ export { DateUtils, ScheduleUtils };
 export { DBHelper };
 
 const DBCommon = {
-  BSON, ConnectionString, MongoDB,
+  BSON, ConnectionString, MongoDBNamespace, MongoClient, Db, Collection,
   Logger,
   DBHelper, DateUtils, ScheduleUtils,
 };

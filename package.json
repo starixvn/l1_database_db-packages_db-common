@@ -23,7 +23,8 @@
   "dependencies": {
     "@ldb/logger": "1.0.1",
     "@ldb/terminal-paint": "1.0.0",
-    "mongodb": "4.10.0",
+    "bson": "4.7.0",
+    "mongodb": "4.11.0",
     "mongodb-connection-string-url": "2.5.4"
   },
   "devDependencies": {

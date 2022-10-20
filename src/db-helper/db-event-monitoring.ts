@@ -13,7 +13,7 @@ export function whenConnectionPoolEvents(event: ConnectionPoolCreatedEvent | Con
   const label = event.constructor.name;
   const subject = event.address;
 
-  Logger.info(undefined, label, subject, time);
+  Logger.debug(undefined, label, subject, time);
 };
 
 /**
